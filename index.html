@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pyschic Game</title>
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    
+        <!-- local CSS settings which will leverage the Bootstrap classes and layout -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    
+    <!-- link the game.js file-->
+    <script type="text/javascript" src="javascript/game.js"></script>
+
+</head>
+
+<body>
+
+    <div id="game">
+        <!-- Create greeting -->
+        <h1 id="rps-greeting">Psychic Game</h1>
+    </div>
+
+    <!-- table to display the results of the game -->
+    <table id="wins-losses-table" class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Guess what letter I'm thinking of (a-z)</th>
+                <th scope="col">Wins</th>
+                <th scope="col">Losses</th>
+                <th scope="col">Guesses Left</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"></th>
+                <td>
+                    <span id="wins-total">
+                        <strong>0</strong>
+                    </span>
+                </td>
+                <td>
+                    <span id="losses-total">
+                        <strong>0</strong>
+                    </span>
+                </td>
+                <td>
+                    <span id="guesses-left">
+                        <strong>9</strong>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <th scope="row">User Guesses:</th>
+                <td colspan="3">[
+                    <span id="user-guesses"> </span>]</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <!-- end HTML -->
+
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+
+    <!-- Popper JS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap JavaScript CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
