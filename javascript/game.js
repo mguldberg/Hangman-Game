@@ -1,4 +1,4 @@
-//Begin Psychic Game JS code - game.js
+//Begin Hangman Game JS code - game.js
 
 // initialize game variables
 var wins = 0;
@@ -28,6 +28,7 @@ lettersLeftToFind = hangmanWordSelectedArray.length;
 //init blank array of '_' and convert to a string to be able to display
 displayLetterArray = generateBlankArray("_", hangmanWordSelectedArray.length);
 var displayLetterString = displayLetterArray.join(" ");
+// var string = guessesSoFar.join(",");
 console.log(displayLetterString);
 
 //setup loading in the blanks for the hangman word in HTML
@@ -58,7 +59,7 @@ document.onkeyup = function (event) {
         //Get hangman word picked from the array by the computer choice
         //Compare hangman word selected to user choice to determine if there was a match
         //
-        //(revealLetter function) 
+        //determine if user guessed a letter correctly 
         //      loop to find letter match - loop through whole word because there could be duplicate letters
         //      exhange blanks('_') in found array for letters in hangman word array
         //      reveal letter (update HTML)
@@ -90,6 +91,8 @@ document.onkeyup = function (event) {
 
         console.log(didUserFindALetter);
 
+        //check variable to see if there are any letter left to find - check with didUserFindALetter is likely redundant
+        //if 0 letters left....user wins
         if (lettersLeftToFind == 0 && didUserFindALetter == true) {
 
             //handle user winning
@@ -98,6 +101,7 @@ document.onkeyup = function (event) {
             //reset the game so user can guess a different
             resetGameNextWord();
         }
+        //else user did not find a letter decrement the guessesLeft
         else if (didUserFindALetter == false) {
             guessesLeft--;
             //add user guess to the array of incorrect user guesses
@@ -135,6 +139,9 @@ document.onkeyup = function (event) {
             pastUserGuesses.length = 0;
             guessesLeft = 9;
 
+            //ask user to try again
+            alert("Please try again.  The word was '" + hangmanWordSelected + "'.");
+
             // Initialize new computerGuess 
             // Randomly chooses a choice from the options array. This is the Computer's guess.
             computerGuess = hangmanWordSelected[Math.floor(Math.random() * hangmanWordSelected.length)];
@@ -147,10 +154,6 @@ document.onkeyup = function (event) {
 
             console.log("final user guess" + userGuess);
 
-            //ask user to try again
-            // alert("Please try again!!");
-            alert("PLease try again");
-
             //reset the game so user can guess a different
             resetGameNextWord();
 
@@ -158,7 +161,7 @@ document.onkeyup = function (event) {
     }
     //ELSE tell user to enter a letter a-z (lowercase)
     else {
-        alert("Please enter a letter a-z (lowercase only)");
+        alert("Please enter a letter a-z (lowercase only). \n Or a letter you have not correctly guesssed yet.");
     }
 };
 
@@ -169,9 +172,10 @@ document.onkeyup = function (event) {
 
 //Compare hangman word selected to user choice to determine if there was a match
 //
-//(revealLetter function) 
+//(determine if the user guesses a letter function) 
 //      loop to find letter match - loop through whole word because there could be duplicate letters
-//      exhange blanks('_') in found array for letters in hangman word array
+//      exhange blanks('_') in found array for letters in hangman word array if they matched a user guess 
+//          check the entire word and swap matches for blank
 //      reveal letter (update HTML)
 function determineIfUserGuessedALetter(wordSelectedArray, guessedLetter) {
     var foundFlag = false;
@@ -185,9 +189,20 @@ function determineIfUserGuessedALetter(wordSelectedArray, guessedLetter) {
             displayLetterArray[i] = wordSelectedArray[i];
             wordSelectedArray[i] = "_";
 
+            //remove the guessed letter from the valid set of letters to guess so if the user picks 
+            //  the letter guessed correctly again it won't count against them
+            console.log("slice a letter before" + userGuessesValidSet);
+            var indexAlreadyGuessed = userGuessesValidSet.indexOf(guessedLetter) 
+            userGuessesValidSet.splice(indexAlreadyGuessed, 1);
+
+            console.log("slice a letter after " + userGuessesValidSet);
+
+    //         index = array.indexOf(element);
+    // array.splice(index, 1);
+
             console.log(guessedLetter + wordSelectedArray[i] + " " + "comp word:" + wordSelectedArray.toString() + " display word:" + displayLetterArray.toString());
 
-            //is the indicator when 0 that the user is a winner - tested outside of this function
+            //decrement counter which is the indicator when 0 that the user is a winner - tested outside of this function
             lettersLeftToFind--;
             console.log(guessedLetter + " " + wordSelectedArray[i] + " letterleft to find" + lettersLeftToFind);
 
@@ -305,9 +320,9 @@ function resetGameNextWord() {
     userGuessesHTML.innerHTML = (" ");
 
     //Reset guesses left total in HTML
-            //Get HTML element for displaying guesses left
-            var guessesLeftHtml = document.getElementById("guesses-left");
-            //set HTML to current wins total
-            guessesLeftHtml.innerHTML = ("<strong>" + guessesLeft + "</strong>");
+    //Get HTML element for displaying guesses left
+    var guessesLeftHtml = document.getElementById("guesses-left");
+    //set HTML to current wins total
+    guessesLeftHtml.innerHTML = ("<strong>" + guessesLeft + "</strong>");
 }
 
