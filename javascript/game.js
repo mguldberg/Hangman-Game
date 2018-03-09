@@ -1,5 +1,8 @@
 //Begin Hangman Game JS code - game.js
 
+
+
+
 // initialize game variables
 var wins = 0;
 var losses = 0;
@@ -40,6 +43,9 @@ console.log(displayLetterString);
 var userGuessesHTML = document.getElementById("user-guesses")
 guessesHTMLString = createArrayString(pastUserGuesses);
 userGuessesHTML.innerHTML = (" " + guessesHTMLString + " ");
+
+//tell user what to do
+alert("Please select any letter to begin. (a-z)");
 
 //Take in user guess
 //This function is run whenever the user presses a key.
